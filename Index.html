@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WOLKE SHOP</title>
+
+<style>
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    overflow-x: hidden;
+
+    background:
+
+        radial-gradient(ellipse at 15% 15%, rgba(145,55,210,.4), transparent 40%),
+
+        radial-gradient(ellipse at 85% 35%, rgba(100,55,195,.35), transparent 42%),
+
+        radial-gradient(ellipse at 50% 90%, rgba(190,55,175,.3), transparent 45%),
+
+        linear-gradient(145deg,#080411,#190b2c 50%,#080411);
+
+}
+
+.stars {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -2;
+
+    pointer-events: none;
+
+    background-image:
+
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+
+        radial-gradient(1px 1px at 70% 20%, white, transparent),
+
+        radial-gradient(2px 2px at 45% 75%, #e9caff, transparent),
+
+        radial-gradient(1px 1px at 85% 65%, white, transparent);
+
+    background-size: 240px 220px;
+
+    animation: moveStars 80s linear infinite;
+
+}
+
+@keyframes moveStars {
+
+    to { transform: translateY(-220px); }
+
+}
+
+.nebula {
+
+    position: fixed;
+
+    width: 430px;
+
+    height: 330px;
+
+    border-radius: 50%;
+
+    filter: blur(80px);
+
+    z-index: -1;
+
+    pointer-events: none;
+
+    opacity: .35;
+
+    animation: float 18s ease-in-out infinite alternate;
+
+}
+
+.nebula.one {
+
+    top: 5%;
+
+    left: -240px;
+
+    background: #c65aff;
+
+}
+
+.nebula.two {
+
+    top: 40%;
+
+    right: -240px;
+
+    background: #8955ff;
+
+}
+
+.nebula.three {
+
+    bottom: -180px;
+
+    left: 10%;
+
+    background: #e45bd1;
+
+}
+
+@keyframes float {
+
+    to { transform: translate(35px,-25px) scale(1.15); }
+
+}
+
+header {
+
+    text-align: center;
+
+    padding: 55px 12px 25px;
+
+}
+
+.cloud {
+
+    display: inline-block;
+
+    padding: 20px 25px;
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 45px rgba(180,100,255,.5);
+
+}
+
+h1 {
+
+    margin: 0;
+
+    font-size: clamp(29px,8vw,43px);
+
+    letter-spacing: 4px;
+
+    text-shadow: 0 0 12px #d2a0ff, 0 0 30px #963fff;
+
+}
+
+.subtitle {
+
+    color: #ddc5f5;
+
+    font-size: 11px;
+
+    letter-spacing: 5px;
+
+    margin-top: 12px;
+
+}
+
+.container {
+
+    width: min(100% - 30px, 430px);
+
+    margin: 0 auto 50px;
+
+}
+
+.section-title {
+
+    text-align: center;
+
+    color: #e5caff;
+
+    letter-spacing: 5px;
+
+    font-size: 13px;
+
+    margin: 28px 0;
+
+}
+
+.product {
+
+    padding: 25px 22px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid rgba(205,157,255,.55);
+
+    border-radius: 21px;
+
+    background: linear-gradient(
+
+        125deg,
+
+        rgba(93,49,130,.55),
+
+        rgba(17,9,32,.9)
+
+    );
+
+    box-shadow:
+
+        0 12px 35px rgba(0,0,0,.35),
+
+        0 0 22px rgba(155,76,230,.2);
+
+    backdrop-filter: blur(15px);
+
+}
+
+.product h2 {
+
+    margin: 0 0 10px;
+
+    font-size: 21px;
+
+}
+
+.price {
+
+    color: #dfaaff;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+
+}
+
+.stock {
+
+    color: #a9f5c5;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin: 0 0 18px;
+
+}
+
+button {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: 1px solid rgba(230,195,255,.7);
+
+    border-radius: 12px;
+
+    color: white;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    background: linear-gradient(105deg,#7135b5,#a64ee0);
+
+    box-shadow: 0 0 20px rgba(165,85,255,.35);
+
+    cursor: pointer;
+
+}
+
+button:hover {
+
+    filter: brightness(1.15);
+
+}
+
+.detail {
+
+    display: none;
+
+}
+
+.back {
+
+    width: auto;
+
+    padding: 11px 18px;
+
+    margin: 20px 0 15px;
+
+}
+
+.detail h2 {
+
+    font-size: 25px;
+
+    text-shadow: 0 0 15px #a45bff;
+
+}
+
+.disclaimer {
+
+    margin: 15px 0 22px;
+
+    padding: 15px;
+
+    border: 1px solid rgba(255,190,120,.5);
+
+    border-radius: 13px;
+
+    background: rgba(100,55,25,.2);
+
+    color: #ffe0bd;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+}
+
+.buy-button {
+
+    display: block;
+
+    width: 100%;
+
+    padding: 25px;
+
+    margin: 22px 0;
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    letter-spacing: 5px;
+
+    border: 1px solid #e8c5ff;
+
+    border-radius: 15px;
+
+    color: white;
+
+    background: linear-gradient(
+
+        110deg,
+
+        #7135b5,
+
+        #bd62ed,
+
+        #7135b5
+
+    );
+
+    box-shadow: 0 0 30px rgba(180,90,255,.55);
+
+}
+
+.payment {
+
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 20px;
+
+    border: 1px solid rgba(205,157,255,.6);
+
+    border-radius: 17px;
+
+    background: rgba(25,13,43,.95);
+
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+
+}
+
+.demo-label {
+
+    color: #ffd58a;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+.demo-code {
+
+    display: block;
+
+    padding: 15px;
+
+    margin: 15px 0;
+
+    border-radius: 9px;
+
+    background: rgba(0,0,0,.35);
+
+    color: #e4c5ff;
+
+    overflow-wrap: anywhere;
+
+}
+
+footer {
+
+    text-align: center;
+
+    color: #b49acb;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    padding: 30px 10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="nebula one"></div>
+
+<div class="nebula two"></div>
+
+<div class="nebula three"></div>
+
+<header>
+
+    <div class="cloud">
+
+        <h1>WOLKE SHOP</h1>
+
+    </div>
+
+    <div class="subtitle">DIGITAL COSMIC STORE</div>
+
+</header>
+
+<main class="container">
+
+<section id="home">
+
+    <div class="section-title">DIGITAL SHOP</div>
+
+    <div class="product">
+
+        <h2>Snapchat Plus</h2>
+
+        <div class="price">3,50 €</div>
+
+        <div class="stock" id="stock-snapchat">
+
+            ● 5 AUF LAGER
+
+        </div>
+
+        <button onclick="showPage('snapchat')">
+
+            ANSEHEN
+
+        </button>
+
+    </div>
+
+    <div class="product">
+
+        <h2>Exklusiver Rabattcode</h2>
+
+        <div class="price">1,00 €</div>
+
+        <div class="stock" id="stock-pc">
+
+            ● 15 AUF LAGER
+
+        </div>
+
+        <button onclick="showPage('pc')">
+
+            ANSEHEN
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- SNAPCHAT PLUS -->
+
+<section class="detail" id="snapchat">
+
+    <button class="back" onclick="showPage('home')">
+
+        ← ZURÜCK
+
+    </button>
+
+    <h2>Snapchat Plus</h2>
+
+    <div class="price">3,50 €</div>
+
+    <div class="stock" id="detail-stock-snapchat">
+
+        ● 5 AUF LAGER
+
+    </div>
+
+    <div class="disclaimer">
+
+        <strong>DISCLAIMER</strong><br>
+
+        Bitte prüfe vor dem Senden sorgfältig die
+
+        Zahlungsadresse und den Betrag. Bei einer
+
+        Überweisung an eine falsche Adresse oder mit
+
+        einem falschen Betrag kann die Transaktion
+
+        möglicherweise nicht rückgängig gemacht werden.
+
+        Gesetzliche Verbraucherrechte bleiben unberührt.
+
+    </div>
+
+    <button class="buy-button"
+
+        onclick="showPayment('payment-snapchat')">
+
+        KAUFEN
+
+    </button>
+
+    <div class="payment" id="payment-snapchat">
+
+        <div class="demo-label">
+
+            TESTMODUS – KEINE ECHTE ZAHLUNG
+
+        </div>
+
+        <p>
+
+            Hier würde später die sichere
+
+            Zahlungsbestätigung angezeigt werden.
+
+        </p>
+
+        <p>
+
+            Es wurde keine Zahlung durchgeführt
+
+            und kein echter Rabattcode vergeben.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- EXKLUSIVER RABATTCODE -->
+
+<section class="detail" id="pc">
+
+    <button class="back" onclick="showPage('home')">
+
+        ← ZURÜCK
+
+    </button>
+
+    <h2>Exklusiver Rabattcode</h2>
+
+    <div class="price">1,00 €</div>
+
+    <div class="stock" id="detail-stock-pc">
+
+        ● 15 AUF LAGER
+
+    </div>
+
+    <div class="disclaimer">
+
+        <strong>DISCLAIMER</strong><br>
+
+        Bitte prüfe vor dem Senden sorgfältig die
+
+        Zahlungsadresse und den Betrag. Bei einer
+
+        Überweisung an eine falsche Adresse oder mit
+
+        einem falschen Betrag kann die Transaktion
+
+        möglicherweise nicht rückgängig gemacht werden.
+
+        Gesetzliche Verbraucherrechte bleiben unberührt.
+
+    </div>
+
+    <button class="buy-button"
+
+        onclick="showPayment('payment-pc')">
+
+        KAUFEN
+
+    </button>
+
+    <div class="payment" id="payment-pc">
+
+        <div class="demo-label">
+
+            TESTMODUS – KEINE ECHTE ZAHLUNG
+
+        </div>
+
+        <p>
+
+            Hier würde später die sichere
+
+            Zahlungsbestätigung angezeigt werden.
+
+        </p>
+
+        <p>
+
+            Es wurde keine Zahlung durchgeführt
+
+            und kein echter Rabattcode vergeben.
+
+        </p>
+
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+
+    WOLKE SHOP · 2026
+
+    <br><br>
+
+    SUPPORT: @wolke1010
+
+</footer>
+
+<script>
+
+function showPage(id) {
+
+    document.querySelectorAll("#home, .detail")
+
+        .forEach(page => {
+
+            page.style.display = "none";
+
+        });
+
+    document.getElementById(id).style.display = "block";
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+function showPayment(id) {
+
+    const payment = document.getElementById(id);
+
+    payment.style.display = "block";
+
+    payment.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "center"
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>
